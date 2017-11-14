@@ -1,20 +1,44 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<app-loading-screen *ngIf="loadingScreen.loading$ | async"></app-loading-screen>
 
+<div class="container" [@btnState]="animating ? 'loading' : 'default'">
+  <h2>FAKE Request button</h2>
+  <input [(ngModel)]="timeout" placeholder="timeout" type="number">
+  <button [loadingButton]="requesting" (click)="fakeRequest()">Click me!</button>
+  <button [loadingButton]="requesting" (click)="animatingFakeRequest()">Click me (animation)!</button>
+</div>
+
+<div class="container">
+  <h2>Hover - Background Color and Font Color!</h2>
+  <button hoverButton>Hover me!</button>
+  <button class="primary" hoverButton>Hover me too!</button>
+  <button class="secondary" hoverButton>I'm Animated!</button>
+</div>
+
+<div class="container">
+  <h2>Show Loading Screen! - Timeout of 3 sec</h2>
+  <button (click)="showLoadingScreen()">click me to show loading!</button>
+</div>
+
+<div class="container">
+  <h2>Show Previous, Current and Next Date!! - Click Previous/Next Date</h2>
+  <button (click)="previousDate()">{{dateService.previousDate$ | async | date:'longDate'}}</button>
+  <div [@dateChange]="dateState"  class="current-date">
+    <span>{{dateService.currentDate$ | async | date:'longDate'}}</span>
+  </div>
+  <button (click)="nextDate()">{{dateService.nextDate$ | async | date:'longDate'}}</button>
+
+</div>
+
+<div class="container">
+  <h2>Role - Show content if Role! - Create *ifRole Directive</h2>
+  <button (click)="roleService.setAdmin()">I'm Admin</button>
+  <button (click)="roleService.setUser()">I'm User</button>
+
+  <h5 *ifRole="role.ADMIN">Admin Content!</h5>
+  <h5 *ifRole="role.USER">User Content!</h5>
+</div>
+
+<h2 [@fontSize]="fontSize">Font Size Animation!</h2>
+<button (click)="fontSize = 'h2'">H2</button>
+<button (click)="fontSize = 'h3'">H3</button>
+<button (click)="fontSize = 'h4'">H4</button>
