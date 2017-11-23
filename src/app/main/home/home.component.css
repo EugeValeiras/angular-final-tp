@@ -1,0 +1,8 @@
+:host, .container {
+  height: 100%;
+}
+
+.logout-button {
+  height: 100px;
+  width: 200px;
+}

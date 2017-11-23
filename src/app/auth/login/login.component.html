@@ -1,0 +1,18 @@
+<form class="login-form" fxFlex="1 0 100" fxLayout="row wrap" [formGroup]="loginForm">
+  <h2>Login Form</h2>
+
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Email" formControlName="email" fxFlex="1 0 100">
+    <span *ngIf="loginForm.get('email').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Password" type="password" formControlName="password" fxFlex="1 0 100">
+    <span *ngIf="loginForm.get('password').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <button fxFlex="1 0 100" (click)="login()">Login</button>
+
+  <a routerLink="/auth/register">Register</a>
+  <span fxFlex="1 0 100" class="error-message">{{message}}</span>
+</form>

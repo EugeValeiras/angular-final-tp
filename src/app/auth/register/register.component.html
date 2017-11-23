@@ -1,0 +1,26 @@
+<form class="register-form" fxFlex="1 0 100" fxLayout="row wrap" [formGroup]="registerForm">
+  <h2>Register Form</h2>
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Full Name" formControlName="fullName" fxFlex="1 0 100">
+    <span *ngIf="registerForm.get('fullName').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Email" formControlName="email" fxFlex="1 0 100">
+    <span *ngIf="registerForm.get('email').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Password" type="password" formControlName="password" fxFlex="1 0 100">
+    <span *ngIf="registerForm.get('password').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <div class="input-container" fxFlex="1 0 100" fxLayout="row wrap">
+    <input placeholder="Repeat Password" type="password" formControlName="repeatPassword" fxFlex="1 0 100">
+    <span *ngIf="registerForm.get('repeatPassword').hasError('required') && sended" class="error-message">required</span>
+  </div>
+
+  <button fxFlex="1 0 100" (click)="register()">Register</button>
+  <span *ngIf="registerForm.hasError('passwordMatch') && sended" fxFlex="1 0 100" class="error-message">Passwords needs to match</span>
+  <a routerLink="/auth/login">Go to Login</a>
+</form>
